@@ -1,0 +1,11 @@
+#this creates the DNS name (redis) inside teh k8 cluster, fastAPI will use redis:6379
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  selector:
+    app: redis
+  ports:
+    - port: 6379
+      targetPort: 6379
