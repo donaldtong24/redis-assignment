@@ -1,9 +1,17 @@
 # Python virtual environment
 .venv/
+venv/
+env/
 
-# Python cache files
+# Python cache
 __pycache__/
 *.py[cod]
+*$py.class
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
 
 # Environment files
 .env
@@ -17,13 +25,12 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
+# Logs
+*.log
+
 # Temporary files
 *.tmp
 *.swp
-*.swo
 
-# Helm/rendered temporary output
-*.rendered.yaml
-
-# Local test output
-*.log
+# Istio distribution
+istio-*/
