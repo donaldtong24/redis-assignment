@@ -12,6 +12,7 @@ spec:
       labels:
         app: python-api
     spec:
+      serviceAccountName: python-api
       containers:
         - name: python-api
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
