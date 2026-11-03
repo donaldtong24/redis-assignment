@@ -34,3 +34,8 @@ Thumbs.db
 
 # Istio distribution
 istio-*/
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
