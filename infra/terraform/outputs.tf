@@ -4,7 +4,7 @@ output "vpc_id" {
 }
 
 output "vpc_cidr_block" {
-  description = "CIDR block of the VPC"
+  description = "CIDR block of the Redis assignment VPC"
   value       = module.vpc.vpc_cidr_block
 }
 
@@ -21,4 +21,24 @@ output "private_subnet_ids" {
 output "nat_gateway_id" {
   description = "ID of the NAT Gateway, if enabled"
   value       = module.vpc.nat_gateway_id
+}
+
+output "eks_cluster_name" {
+  description = "Name of the EKS cluster"
+  value       = module.eks.cluster_name
+}
+
+output "eks_cluster_endpoint" {
+  description = "Kubernetes API endpoint"
+  value       = module.eks.cluster_endpoint
+}
+
+output "eks_cluster_version" {
+  description = "Kubernetes version"
+  value       = module.eks.cluster_version
+}
+
+output "eks_cluster_arn" {
+  description = "ARN of the EKS cluster"
+  value       = module.eks.cluster_arn
 }
