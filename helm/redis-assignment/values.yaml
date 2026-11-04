@@ -30,3 +30,5 @@ ingress:
   className: nginx
   host: localhost
   path: /api(.*)
+istio:
+  enabled: true

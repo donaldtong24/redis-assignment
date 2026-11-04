@@ -1,0 +1,14 @@
+image:
+  repository: 574246332259.dkr.ecr.us-east-1.amazonaws.com/redis-assignment/python-api
+  tag: "stage14-bea890c"
+  pullPolicy: IfNotPresent
+
+ingress:
+  enabled: false
+
+istio:
+  enabled: false
+
+redis:
+  storage:
+    storageClassName: gp2

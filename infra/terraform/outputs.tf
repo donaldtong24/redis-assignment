@@ -42,3 +42,7 @@ output "eks_cluster_arn" {
   description = "ARN of the EKS cluster"
   value       = module.eks.cluster_arn
 }
+output "ecr_repository_url" {
+  description = "URL of the python-api ECR repository"
+  value       = aws_ecr_repository.python_api.repository_url
+}
