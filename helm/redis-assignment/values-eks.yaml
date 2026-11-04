@@ -16,7 +16,7 @@ ingress:
     alb.ingress.kubernetes.io/healthcheck-path: /
 
 istio:
-  enabled: false
+  enabled: true
 
 redis:
   storage:
