@@ -42,11 +42,28 @@ pipeline {
                 '''
             }
         }
+
+        // This stage only ever edits Git - it never runs kubectl/helm against the
+        // cluster. Argo CD (Stage 20) is the only thing that talks to the cluster,
+        // and it does so by watching this same repo, not by watching Jenkins.
+        stage('Promote') {
+            steps {
+                sh '''
+                    git config user.email "jenkins@redis-assignment"
+                    git config user.name "Jenkins CI"
+                    sed -i "s#tag: .*#tag: ${IMAGE_TAG}#" helm/redis-assignment/values-eks.yaml
+                    git add helm/redis-assignment/values-eks.yaml
+                    git diff --cached --quiet && echo "no change to promote" && exit 0
+                    git commit -m "Promote python-api to ${IMAGE_TAG} [ci skip]"
+                    git push origin HEAD:main
+                '''
+            }
+        }
     }
 
     post {
         success {
-            echo "Pushed ${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG} - ready for the manifest-promotion pipeline to pick up."
+            echo "Pushed ${ECR_REGISTRY}/${ECR_REPO}:${IMAGE_TAG} and promoted values-eks.yaml - Argo CD (once installed) picks this up from Git."
         }
         failure {
             echo "Build ${env.BUILD_NUMBER} failed at stage: ${env.STAGE_NAME}"
