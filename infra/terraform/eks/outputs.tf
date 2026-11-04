@@ -17,3 +17,8 @@ output "cluster_arn" {
   description = "ARN of the EKS cluster"
   value       = aws_eks_cluster.main.arn
 }
+
+output "alb_controller_role_arn" {
+  description = "IAM role ARN for the AWS Load Balancer Controller service account"
+  value       = aws_iam_role.alb_controller.arn
+}

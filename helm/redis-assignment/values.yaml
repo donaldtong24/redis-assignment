@@ -30,5 +30,8 @@ ingress:
   className: nginx
   host: localhost
   path: /api(.*)
+  pathType: ImplementationSpecific
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: $1
 istio:
   enabled: true

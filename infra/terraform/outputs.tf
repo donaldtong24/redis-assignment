@@ -46,3 +46,8 @@ output "ecr_repository_url" {
   description = "URL of the python-api ECR repository"
   value       = aws_ecr_repository.python_api.repository_url
 }
+
+output "alb_controller_role_arn" {
+  description = "IAM role ARN for the AWS Load Balancer Controller service account"
+  value       = module.eks.alb_controller_role_arn
+}
