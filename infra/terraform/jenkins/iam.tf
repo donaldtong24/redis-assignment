@@ -51,6 +51,23 @@ resource "aws_iam_role_policy" "jenkins_ecr_push" {
   })
 }
 
+resource "aws_iam_role_policy" "jenkins_bootstrap_param" {
+  name = "bootstrap-param-write"
+  role = aws_iam_role.jenkins.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid      = "WriteOwnBootstrapSecret"
+        Effect   = "Allow"
+        Action   = ["ssm:PutParameter", "ssm:GetParameter"]
+        Resource = "arn:aws:ssm:*:*:parameter/redis-assignment/jenkins/*"
+      }
+    ]
+  })
+}
+
 resource "aws_iam_role_policy_attachment" "jenkins_ssm" {
   role       = aws_iam_role.jenkins.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
