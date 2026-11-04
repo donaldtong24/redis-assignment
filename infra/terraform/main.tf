@@ -21,3 +21,14 @@ module "eks" {
 
   depends_on = [module.vpc]
 }
+
+module "jenkins" {
+  source = "./jenkins"
+
+  vpc_id               = module.vpc.vpc_id
+  subnet_id            = module.vpc.public_subnet_ids["public-a"]
+  admin_public_ip_cidr = var.admin_public_ip_cidr
+  ecr_repository_arn   = aws_ecr_repository.python_api.arn
+
+  depends_on = [module.vpc]
+}

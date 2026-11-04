@@ -51,3 +51,8 @@ output "alb_controller_role_arn" {
   description = "IAM role ARN for the AWS Load Balancer Controller service account"
   value       = module.eks.alb_controller_role_arn
 }
+
+output "jenkins_public_ip" {
+  description = "Public IP of the Jenkins controller"
+  value       = module.jenkins.public_ip
+}
