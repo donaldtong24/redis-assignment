@@ -6,5 +6,17 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   mtls:
+    mode: PERMISSIVE
+---
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: redis-strict
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  mtls:
     mode: STRICT
 {{- end }}
