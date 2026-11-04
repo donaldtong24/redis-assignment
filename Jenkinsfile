@@ -6,6 +6,7 @@ pipeline {
         ECR_REGISTRY = '574246332259.dkr.ecr.us-east-1.amazonaws.com'
         ECR_REPO     = 'redis-assignment/python-api'
         IMAGE_TAG    = "build-${env.BUILD_NUMBER}-${env.GIT_COMMIT.take(7)}"
+        GIT_SSH_COMMAND = "ssh -i /var/jenkins_home/.ssh/id_ed25519 -o UserKnownHostsFile=/var/jenkins_home/.ssh/known_hosts -o IdentitiesOnly=yes"
     }
 
     stages {
