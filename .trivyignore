@@ -1,0 +1,7 @@
+# CVE-2025-47273: Trivy's python-pkg scanner reports setuptools 70.3.0 on this
+# base image, but no file in the built image actually contains that version -
+# `python3 -c "import setuptools; print(setuptools.__version__)"` reports
+# 84.2.1 (patched), there is no matching dist-info/egg-info/wheel anywhere on
+# disk, and dpkg has no setuptools package. Confirmed false positive via
+# direct filesystem/import inspection on 2026-11-04.
+CVE-2025-47273
