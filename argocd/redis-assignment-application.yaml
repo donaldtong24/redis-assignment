@@ -13,6 +13,8 @@ spec:
 
     helm:
       releaseName: redis-assignment
+      valueFiles:
+        - values-eks.yaml
 
   destination:
     server: https://kubernetes.default.svc
