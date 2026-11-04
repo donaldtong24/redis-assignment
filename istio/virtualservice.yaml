@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: fastapi
+  namespace: default
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - fastapi-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: python-api
+            port:
+              number: 80
