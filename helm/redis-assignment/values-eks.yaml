@@ -1,6 +1,6 @@
 image:
   repository: 574246332259.dkr.ecr.us-east-1.amazonaws.com/redis-assignment/python-api
-  tag: "stage14-bea890c"
+  tag: "stage16-bafdd93"
   pullPolicy: IfNotPresent
 
 ingress:

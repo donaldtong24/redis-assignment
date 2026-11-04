@@ -11,6 +11,10 @@ spec:
     metadata:
       labels:
         app: python-api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "{{ .Values.service.targetPort }}"
     spec:
       serviceAccountName: python-api
       containers:
@@ -24,3 +28,22 @@ spec:
                 name: redis-cm
             - secretRef:
                 name: redis-secret
+          startupProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.targetPort }}
+            failureThreshold: 30
+            periodSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.targetPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.service.targetPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3

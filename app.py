@@ -1,8 +1,10 @@
 from fastapi import FastAPI, HTTPException, Request
+from prometheus_fastapi_instrumentator import Instrumentator
 import redis
 import os
 
 app = FastAPI()
+Instrumentator().instrument(app).expose(app)
 
 #connect to redis using env variables
 #these defaults will become important later
@@ -23,6 +25,14 @@ async def log_requests(request: Request, call_next):
 @app.get("/")
 def root():
     return {"message" : "FastAPI is working!!!"}
+
+@app.get("/health")
+def health():
+    try:
+        r.ping()
+    except redis.RedisError as e:
+        raise HTTPException(status_code=503, detail=f"redis unreachable: {e}")
+    return {"status": "ok"}
 
 @app.post("/cache")
 def store_value(key:str, value:str):
