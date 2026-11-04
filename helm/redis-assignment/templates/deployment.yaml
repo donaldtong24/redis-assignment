@@ -4,6 +4,11 @@ metadata:
   name: python-api
 spec:
   replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ .Values.rollout.maxSurge }}
+      maxUnavailable: {{ .Values.rollout.maxUnavailable }}
   selector:
     matchLabels:
       app: python-api
