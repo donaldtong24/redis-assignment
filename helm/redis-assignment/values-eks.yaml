@@ -1,6 +1,6 @@
 image:
   repository: 574246332259.dkr.ecr.us-east-1.amazonaws.com/redis-assignment/python-api
-  tag: build-5-97050b9
+  tag: totally-broken-tag-does-not-exist
   pullPolicy: IfNotPresent
 
 ingress:
